@@ -85,9 +85,7 @@
     <None Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="sitecore\shell\client\Applications\ECM\EmailCampaign.Client\Pipelines\AddAttachments\AddAttachment.Execute.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="sitecore\shell\client\Applications\ECM\EmailCampaign.Client\Pipelines\AddAttachments\AddAttachment.Execute.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
