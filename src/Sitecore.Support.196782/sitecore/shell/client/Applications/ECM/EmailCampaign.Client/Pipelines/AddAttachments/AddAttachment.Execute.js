@@ -2,7 +2,7 @@
   return {
     priority: 1,
     execute: function (context) {
-      var requestName = "EXM/AddAttachment";
+      var requestName = "EXM/SupportAddAttachment";
 
       ServerRequest(requestName, {
         data: {

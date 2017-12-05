@@ -22,7 +22,7 @@ namespace Sitecore.Support.EmailCampaign.Server.Controllers.Attachment
     /// <summary>
     /// Defines the <see cref="AddAttachmentController"/> class.
     /// </summary>
-    [ServicesController("EXM.AddAttachment")]
+    [ServicesController("EXM.SupportAddAttachment")]
     [SitecoreAuthorize(Modules.EmailCampaign.Core.Constants.AdvancedUsersRoleName, Modules.EmailCampaign.Core.Constants.UsersRoleName)]
     public class AddAttachmentController : ServicesApiController
     {
@@ -111,6 +111,8 @@ namespace Sitecore.Support.EmailCampaign.Server.Controllers.Attachment
                 var messageAttachments = messageItem.Source.Attachments;
                 var mediaItem = new MediaItem(attachment);
 
+                PopulateCurrentMediaVersion(mediaItem, Globalization.Language.Parse(data.Language));
+
                 long totalAttachmentSize = messageAttachments.Sum(x => x.Size) + mediaItem.Size;
                 if (totalAttachmentSize > GlobalSettings.AttachmentTotalSizeInBytes)
                 {
@@ -152,6 +154,16 @@ namespace Sitecore.Support.EmailCampaign.Server.Controllers.Attachment
             }
 
             return response;
+        }
+
+        private void PopulateCurrentMediaVersion(MediaItem mediaItem, Language language)
+        {
+            if (mediaItem.GetMediaStream()==null)
+            {
+                var contextVersionMediaItem = new MediaItem(mediaItem.InnerItem.Versions.GetLatestVersion(Sitecore.Context.Language));
+                var media = MediaManager.GetMedia(mediaItem);
+                media.SetStream(contextVersionMediaItem.GetMediaStream(), contextVersionMediaItem.Extension);               
+            }
         }
 
         private bool ProposeCopyToAllLanguages(MessageItem messageItem, string contextLanguage, string fileName)
