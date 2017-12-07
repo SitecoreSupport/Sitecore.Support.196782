@@ -85,7 +85,7 @@
     <None Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App_Config\Include\zzz\Sitecore.Support.196782.config" />
+    <Content Include="App_Config\Include\zzz\Sitecore.Support.196782.config" />
     <Content Include="sitecore\shell\client\Applications\ECM\EmailCampaign.Client\Pipelines\AddAttachment\AddAttachment.Execute.js" />
   </ItemGroup>
   <PropertyGroup>
